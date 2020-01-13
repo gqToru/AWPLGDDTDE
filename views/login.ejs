@@ -1,0 +1,28 @@
+<%- include('partials/header'); -%>
+
+<div class="row">
+    <img class="mx-auto mt-4" src="/img/logo1.png" id="logo" alt="">
+</div>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4 mx-auto mt-4">
+        <div class="container-fluid rounded-lg" id="container">
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input class="form-control" required type="text" name="username" placeholder="usuario">
+                    <label for="password">Contraseña</label>
+                    <input class="form-control" required type="password" name="password" placeholder="contraseña">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                    <a class="btn btn-info" role="button" href="/registro" id="registro">Registrarse</a>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+
+<%- include('partials/footer'); -%>
