@@ -11,46 +11,19 @@
         </li>
     </ul>
 </nav>
+
 <div class="row">
-    <div class="col-lg-8 tablaPad" id="tablaDiv">
-        <div class="container-fluid" id="contenedorIndex">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="col-lg-8">
+        <%- include('partials/selections'); -%>
+        <%- include('partials/selections'); -%>
+        <%- include('partials/selections'); -%>
+        <%- include('partials/selections'); -%>
+        <%- include('partials/selections'); -%>
+        <%- include('partials/selections'); -%>
     </div>
-    <div class="col-lg-4 tablaPad">
-        <img src="/img/profile-placeholder.png" alt="" class="img-thumbnail">
+    <div class="col-lg-4">
+        <img src="/img/profile-placeholder.png" class="img-thumbnail" alt="">
     </div>
 </div>
-
-
 
 <%- include('partials/footer'); -%>
