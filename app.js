@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost:27017/proyecto_udo', {
 /* DIRECTIVA DE SEGURIDAD */
 app.use(csp({
     directives: {
-      defaultSrc: ['*', "'self'"],
+      defaultSrc: ['*'],
       imgSrc: ['*', 'data:' ],
       scriptSrc: ['*'],
       styleSrc: ['*',`'unsafe-inline'`]
@@ -64,7 +64,7 @@ app.get('/registro', function(req,res){
 })
 
 app.post('/registro', function(req,res){
-    const newUser = new User({username: req.body.username});
+    const newUser = new User({username: req.body.username, nombreUsuario: req.body.nombreUsuario});
    User.register(newUser, req.body.password, function(err, user){
        if(err){
            console.log(err);
@@ -77,7 +77,7 @@ app.post('/registro', function(req,res){
 });
 
 app.get('/index', isLoggedIn, function(req,res){
-    res.render('index');
+    res.render('index', {currentUser: req.user});
 });
 
 /* RUTA DE DESCONEXION */
