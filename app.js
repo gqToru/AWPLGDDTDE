@@ -44,7 +44,7 @@ passport.deserializeUser(User.deserializeUser());
 
 /* RUTAS */
 app.get('/', function(req,res){
-    res.render('landing');
+    res.redirect('/login');
 });
 
 app.get('/login', function(req,res){

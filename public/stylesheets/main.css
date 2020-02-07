@@ -1,17 +1,20 @@
-html, body{
+body{
     margin: 0;
-    height: 100%;
+    padding: 0;
+    background: #34495e;
+    /* height: 100%;
     background-image: url(/img/fondo2.webp);
     background-size: cover;
     background-position: center;
     font-family: 'Roboto Condensed', sans-serif;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
 }
 #container{
     margin-top: 5%;
-    border: 1px solid grey;
+    border: 1px solid #120a3d;
     padding: 10px;
-    background: #eaeaea;
+    background: #33334d;
+    color: white;
 }
 
 #logo{
@@ -70,4 +73,82 @@ hr{
 
 #tablaDiv, .tablaPad{
     padding: 3%;
+}
+
+.box{
+    width: 360px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #191919;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.box h1{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.box input[type = 'text'], .box input[type = 'password']{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.box input[type = 'text']:focus, .box input[type = 'password']:focus{
+    width: 280px;
+    border-color: #2ecc71;
+}
+
+.box input[type = 'submit']{
+    border: 0;
+    background: none;
+    display: inline;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 12px 20px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.box a{
+    border: 0;
+    background: none;
+    display: inline;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #036ffc;
+    padding: 14px 10px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.box a:hover{
+    background: #036ffc;
+}
+
+.box input[type = 'submit']:hover{
+    background: #2ecc71;
 }
