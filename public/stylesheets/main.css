@@ -1,13 +1,13 @@
-body{
+html, body{
     margin: 0;
     padding: 0;
-    background: #34495e;
-    /* height: 100%;
-    background-image: url(/img/fondo2.webp);
+    /* background: #34495e; */
+    height: 100%;
+    background-image: url(/img/fondo2.jpg);
     background-size: cover;
     background-position: center;
-    font-family: 'Roboto Condensed', sans-serif;
-    background-repeat: no-repeat; */
+    font-family: sans-serif;
+    background-repeat: no-repeat; 
 }
 #container{
     margin-top: 5%;
@@ -80,17 +80,28 @@ hr{
     padding: 40px;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 72%;
     transform: translate(-50%,-50%);
-    background: #191919;
+    background: #2d3037;
     text-align: center;
     border-radius: 20px;
+    /* box-shadow: 5px 10px 8px #111; */
+}
+
+.box .boxlogo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
 }
 
 .box h1{
     color: white;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-weight: 500;
+    margin-top: 20px;
 }
 
 .box input[type = 'text'], .box input[type = 'password']{
@@ -99,7 +110,7 @@ hr{
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #3498db;
+    border: 2px solid #fff;
     padding: 14px 10px;
     width: 200px;
     outline: none;
@@ -147,6 +158,26 @@ hr{
 
 .box a:hover{
     background: #036ffc;
+}
+
+.box .boxcancel{
+    border: 0;
+    background: none;
+    display: inline;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #c0392b;
+    padding: 14px 10px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.box .boxcancel:hover{
+    background: #c0392b;
 }
 
 .box input[type = 'submit']:hover{
