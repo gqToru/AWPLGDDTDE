@@ -183,3 +183,163 @@ hr{
 .box input[type = 'submit']:hover{
     background: #2ecc71;
 }
+
+.navbar-background{
+    background: #2d3037;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Automata */
+
+/*PRUEBA
+*/
+.pantallaOn{
+    display: block;
+}
+.pantallaOff{
+    display: none;
+}
+#click{
+    border: 1px solid black;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;    
+    font-size: 100%;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+#first{
+    margin-top: 100px;
+    height: 500px;
+    overflow-y: auto;
+}
+#innerFirst{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+}
+.materia{
+    display: flex;
+    flex-flow: column;
+    background-color: #dee2e6;
+    padding: 1rem;
+    border-radius: 5px;
+    user-select: none;    
+    cursor: pointer;
+}
+.materia > h4, h5, h6{
+    margin: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.materia h6:last-of-type{
+    margin-bottom: 2px;
+}
+
+.selected{
+    background-color: #74c0fc;
+}
+.intensity{
+    background-color: white;
+}
+.sign{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    text-align: center;
+}
+/*PRUEBA
+*/
+body{
+    font-family: lucida sans regular;
+}
+
+h2, h3{
+    text-align: center;
+    font-variant: small-caps;
+}
+table{
+    background-color:#343a40;
+    border-radius: 5px;
+    padding: 2px;
+    margin: auto;
+    border-spacing: 1px;
+    user-select: none;
+}
+table tr:first-child td{
+    background-color: #343a40;
+    color:#f8f9fa
+}
+table tr:nth-child(1n+2) td:first-child{
+    background-color: #495057;
+    color:#f8f9fa;
+}
+
+table tr{
+    border-radius: 10px;
+}
+table tr td{
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    font-variant: small-caps;
+    background-color: white;
+}
+
+table tr td:hover{
+    background-color: #e7f5ff;
+    transition: .3s;
+}
+.selector{
+ background-color: #e9ecef;
+ width: 400px;
+ margin: auto;
+ margin-top: 20px;
+ display: flex;
+ border-radius: 5px;
+ }
+.selector div{
+height: 50px;
+width: 100px;
+background-color: #f8f9fa;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 5px;
+border-radius: 5px;
+font-family: lucida sans regular;
+font-size: 20px;
+font-variant: small-caps;
+font-weight: bold;
+user-select: none;
+}
+.selector div:last-child{
+    margin-left: 30px;
+}
+.selector div:hover{
+    background-color: #dee2e6;
+    cursor: pointer;
+}
