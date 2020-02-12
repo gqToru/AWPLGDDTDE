@@ -1,13 +1,13 @@
-html, body{
+body{
     margin: 0;
-    padding: 0;
     /* background: #34495e; */
-    height: 100%;
     background-image: url(/img/fondo2.jpg);
-    background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    user-select: none;
     font-family: sans-serif;
-    background-repeat: no-repeat; 
 }
 #container{
     margin-top: 5%;
@@ -209,13 +209,14 @@ hr{
 
 /*PRUEBA
 */
+
+
+/*PRUEBA
+*/
 .pantallaOn{
     display: block;
 }
-.pantallaOff{
-    display: none;
-}
-#click{
+.bFinal{
     border: 1px solid black;
     border-radius: 25px;
     display: flex;
@@ -229,11 +230,15 @@ hr{
     margin-top: 20px;
     cursor: pointer;
 }
-
+.pantallaOff{
+    display: none;
+}
 #first{
-    margin-top: 100px;
     height: 500px;
     overflow-y: auto;
+    width: 95%;
+    margin: auto;
+    margin-top: 80px;
 }
 #innerFirst{
     display: grid;
@@ -273,9 +278,11 @@ hr{
 }
 /*PRUEBA
 */
-body{
+
+/* body{
     font-family: lucida sans regular;
-}
+    user-select: none;
+} */
 
 h2, h3{
     text-align: center;
@@ -284,8 +291,9 @@ h2, h3{
 table{
     background-color:#343a40;
     border-radius: 5px;
-    padding: 2px;
+    padding: 1px;
     margin: auto;
+    margin-top: 10px;
     border-spacing: 1px;
     user-select: none;
 }
@@ -302,11 +310,12 @@ table tr{
     border-radius: 10px;
 }
 table tr td{
-    width: 100px;
-    height: 50px;
+    width: 120px;
+    height: 20px;
     text-align: center;
     font-variant: small-caps;
     background-color: white;
+    font-size: 12px;
 }
 
 table tr td:hover{

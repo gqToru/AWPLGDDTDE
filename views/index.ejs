@@ -11,9 +11,11 @@
         </li>
     </ul>
 </nav>
-
-<div>
+<% if(currentUser.firstHorario){ %>
     <%- include('partials/selections'); -%>
-</div>
+<% }else{ %>
+    <h1>Santiago es gei</h1>
+<% } %>
+
 
 <%- include('partials/footer'); -%>

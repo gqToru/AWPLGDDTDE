@@ -7,6 +7,7 @@ var express         = require('express'),
       LocalStrategy = require('passport-local'),
       User          = require('./models/user')
 
+
 mongoose.connect('mongodb://localhost:27017/proyecto_udo', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -17,7 +18,7 @@ app.use(csp({
     directives: {
       defaultSrc: ['*'],
       imgSrc: ['*', 'data:' ],
-      scriptSrc: ['*'],
+      scriptSrc: ['*',`'unsafe-inline'`],
       styleSrc: ['*',`'unsafe-inline'`]
     }
   }));
@@ -64,7 +65,7 @@ app.get('/registro', function(req,res){
 })
 
 app.post('/registro', function(req,res){
-    const newUser = new User({username: req.body.username, nombreUsuario: req.body.nombreUsuario});
+    const newUser = new User({username: req.body.username, nombreUsuario: req.body.nombreUsuario, firstHorario: true});
    User.register(newUser, req.body.password, function(err, user){
        if(err){
            console.log(err);
@@ -75,6 +76,12 @@ app.post('/registro', function(req,res){
        });
    });
 });
+
+app.post('/ajaxRoute', (req,res)=>{
+    console.log(req.body);
+    res.status(200).json({msg:'OK'});
+});
+
 
 app.get('/index', isLoggedIn, function(req,res){
     res.render('index', {currentUser: req.user});
