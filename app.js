@@ -7,6 +7,10 @@ var express         = require('express'),
       LocalStrategy = require('passport-local'),
       User          = require('./models/user')
 
+var saludo = "no";
+var saludo2 = "no tampoco";
+mongoose.set('useFindAndModify', false);
+
 
 mongoose.connect('mongodb://localhost:27017/proyecto_udo', {
     useNewUrlParser: true,
@@ -78,8 +82,46 @@ app.post('/registro', function(req,res){
 });
 
 app.post('/ajaxRoute', (req,res)=>{
-    console.log(req.body);
+    saludo = req.body.arrayBox;
+    var lol = req.user.username;
+    const filter = { username: `${lol}` }
+    const update = { horario: saludo, firstHorario: false }
+    console.log(JSON.parse(saludo));
     res.status(200).json({msg:'OK'});
+   // console.log(saludo);
+    //console.log(update);
+   // console.log(filter);
+    User.findOneAndUpdate(filter, update, function(err, doc){
+        if(err){
+            console.log("Something wrong when updating data!"+ err.message);
+        }
+       // console.log(doc);    
+    });
+});
+app.post('/ajaxRoute2', (req,res)=>{
+    saludo2 = req.body.arraySelected;
+    var lol = req.user.username;
+    const filter = { username: `${lol}` }
+    const update = { seleccionado: saludo2}
+    console.log(JSON.parse(saludo2));
+    res.status(200).json({msg:'OK'});
+   // console.log(saludo);
+   // console.log(update);
+   // console.log(filter);
+    User.findOneAndUpdate(filter, update, function(err, doc){
+        if(err){
+            console.log("Something wrong when updating data!"+ err.message);
+        }
+    
+        //console.log(doc);
+    });
+});
+
+app.get('/test',function(req,res){
+
+    console.log(saludo)           
+    console.log(saludo2)    
+   
 });
 
 

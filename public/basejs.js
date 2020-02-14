@@ -79,7 +79,7 @@ function activate (accion){
             }
            }else if (accion == 'clear'){
                for (var i = 0; i < casilla.length; i++){
-                   if(i % 8 != 0 && i > 8 && i !=81 && i !=82 && i !=83 && i !=84 && i !=85 && i !=86 && i !=87){                       
+                   if(i % 8 != 0 && i > 8 && i !=217 && i !=218 && i !=219 && i !=220 && i !=221 && i !=222 && i !=223){                       
                    casilla[i].style.backgroundColor = 'white';
                 }
                }
@@ -290,7 +290,9 @@ b.addEventListener('click', function(){
         two.classList.add('pantallaOff');
         three.classList.remove('pantallaOff');
         three.classList.add('pantallaOn');
-        b.classList.add('pantallaOff');
+        b.addEventListener('click', send);
+        b.addEventListener('click', send2);
+        
         
         for (var i = 0; i < casilla.length; i++){
             if (i > 8 && i!= 16 && i!= 24 && i!= 32 && i!= 40 && i!= 48 && i!= 56 && i!= 64 && i!= 72){
@@ -318,19 +320,8 @@ b.addEventListener('click', function(){
                     nuevoArray[j][i] = materiaToAssign.nombre;
                 }
             }
-        }
-        var testJson = JSON.stringify(nuevoArray);
-        
-            $.ajax({
-            url : "/ajaxRoute",
-            type: "POST",
-           dataType:'json',
-            data : testJson,
-            success: function(data){
-                console.log(data.msg); // 'OK'
-            },
-        });
-    }
+        }    
+}
     for(var k= 0; k< 7; k++){
         let temporal = [];
         for(var j= 0; j< fila; j++){
@@ -377,3 +368,36 @@ function copyArray(array){
     return arrayReturned;
 }
 
+function send(){
+         var testJson = JSON.stringify(nuevoArray);
+        $.ajax({
+        url : "/ajaxRoute",
+        type: "POST",
+       dataType:'json',
+        data : {
+            arrayBox: testJson        
+        },
+        success: function(data){
+            console.log(data.msg); // 'OK'
+        },
+    });
+}
+
+function send2(){
+    var testJson2 = JSON.stringify(arrayMateriasSelected);
+    
+    console.log(testJson2);
+        $.ajax({
+        url : "/ajaxRoute2",
+        type: "POST",
+       dataType:'json',
+        data : {            
+            arraySelected: testJson2
+        },
+        success: function(data){
+            console.log(data.msg); // 'OK'
+        },
+    });
+    three.classList.add('pantallaOff');
+    b.classList.add('pantallaOff');
+}

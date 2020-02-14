@@ -1,20 +1,20 @@
 <%- include('partials/header'); -%>
 
 <nav class="navbar navbar-background navbar-expand-lg">
-    <img src="/img/logo1.png" id="brandLogo" alt=""><a href="#" class="navbar-brand">UDO</a>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a href="#" class="nav-link">Conectado como: <%= currentUser.nombreUsuario %></a>
-        </li>
-        <li class="nav-item">
+    <div><img src="/img/logo1.png" id="brandLogo" alt=""><a href="/index" class="navbar-brand">AidUDO</a></div>
+    
+        <div class="navbar-nav">
+            <a href="/index" class="nav-link">Conectado como: <%= currentUser.nombreUsuario %></a>
+        
+        
             <a href="/logout" class="nav-link">Desconectarse</a>
-        </li>
-    </ul>
+        
+        </div>
 </nav>
-<% if(currentUser.firstHorario){ %>
+<% if(currentUser.firstHorario == true){ %>
     <%- include('partials/selections'); -%>
 <% }else{ %>
-    <h1>Santiago es gei</h1>
+    <%- include('partials/dashboard'); -%>
 <% } %>
 
 
