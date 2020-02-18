@@ -269,6 +269,18 @@ hr{
     border-radius: 10px;
     background: linear-gradient(145deg, #e6e6e6, #ffffff);
 }
+.divs4{
+    overflow-y: auto;
+    width: 95%;
+    margin: auto;
+    margin-top: 80px;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+}
+#yy{
+    display: none;
+}
 #first{
     height: 500px;
     overflow-y: auto;

@@ -6,10 +6,14 @@ var express         = require('express'),
       passport      = require('passport'),
       LocalStrategy = require('passport-local'),
       User          = require('./models/user')
+      mongoose.set('useFindAndModify', false);
 
 var saludo = "no";
 var saludo2 = "no tampoco";
-mongoose.set('useFindAndModify', false);
+var x;
+
+
+
 
 
 mongoose.connect('mongodb://localhost:27017/proyecto_udo', {
@@ -86,7 +90,7 @@ app.post('/ajaxRoute', (req,res)=>{
     var lol = req.user.username;
     const filter = { username: `${lol}` }
     const update = { horario: saludo, firstHorario: false }
-    console.log(JSON.parse(saludo));
+    var y = JSON.parse(saludo);
     res.status(200).json({msg:'OK'});
    // console.log(saludo);
     //console.log(update);
@@ -103,7 +107,6 @@ app.post('/ajaxRoute2', (req,res)=>{
     var lol = req.user.username;
     const filter = { username: `${lol}` }
     const update = { seleccionado: saludo2}
-    console.log(JSON.parse(saludo2));
     res.status(200).json({msg:'OK'});
    // console.log(saludo);
    // console.log(update);
@@ -126,7 +129,13 @@ app.get('/test',function(req,res){
 
 
 app.get('/index', isLoggedIn, function(req,res){
-    res.render('index', {currentUser: req.user});
+    if(req.user.seleccionado != 'nada'){
+    var x = JSON.parse(req.user.seleccionado);
+    var y = JSON.parse(req.user.horario);
+    console.log(x)
+    console.log(y)
+    }
+    res.render('index', {currentUser: req.user, mostrar: x, cuadro: y});
 });
 
 /* RUTA DE DESCONEXION */

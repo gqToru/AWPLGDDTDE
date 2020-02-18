@@ -18,27 +18,54 @@ for(var i=0; i<fila; i++) {
 
 for(var i=0; i<fila; i++){
     for(var j=0; j<7; j++){
-        nuevoArray[i][j]= 0;
+        nuevoArray[i][j]= '';
     }
 }
+
+// ============= AQUI EMPIEZAN LOS CAMBIOS DE LA VAINA DE LA SELECCIÖN MÜLTIPLE =================
+
+/*
 var testo = document.documentElement;
 testo.addEventListener('mousedown', function(){
     respond = 1;
-
 });
 testo.addEventListener('mouseup', function(){
     respond = 0;
-});
+});*/
 
+var mouseState = {'mousedown': false, 'mouseup': false};
 
 for (var i = 0; i < casilla.length; i++){
-    if (i > 8 && i!= 16 && i!= 24 && i!= 32 && i!= 40 && i!= 48 && i!= 56 && i!= 64 && i!= 72){
-        casilla[i].addEventListener( 'mouseover', table);        
+    if (i % 8 != 0){
+    	['mouseover', 'mousedown', 'mouseup'].forEach(event => casilla[i].addEventListener(event, function(e){
+    		mouseState[e.type] = e.type == 'mousedown' || e.type == 'mouseup';
+    		table(e);
+    	}));
+    	//casilla[i].addEventListener('mouseover', table);
     } 
 }
 
 
 function table(e){
+	if(mouseState.mousedown == true && mouseState.mouseup == false){
+		let field = e.target;
+		field.behaviour = valor;
+		nuevoArray[parseInt(field.className)][field.cellIndex-1] = field.behaviour;
+		if (valor == 0){
+            field.style.backgroundColor = 'white';
+        }
+        else if (valor == 1){
+            field.style.backgroundColor = '#228be6';
+        }
+        else{
+            field.style.backgroundColor = '#fa5252';
+        };
+	}
+	else{
+		mouseState = {'mousedown': false, 'mouseup': false};
+	}
+		/*
+		console.log(e);
         if(respond == 1){
         var field = e.target;
         field.behaviour = valor;
@@ -53,7 +80,11 @@ function table(e){
             field.style.backgroundColor = '#fa5252';
         };
         }
-    }
+        */
+
+}
+
+// ================= AQUI TERMINAN ==================
 
 function activate (accion){
         if (accion == 'red'){
@@ -86,7 +117,7 @@ function activate (accion){
 
                    for(var i=0; i<fila; i++){
                     for(var j=0; j<7; j++){
-                        nuevoArray[i][j]= 0;
+                        nuevoArray[i][j]= '';
                     }
                 }
                    
@@ -299,6 +330,31 @@ b.addEventListener('click', function(){
                 casilla[i].removeEventListener('mouseover', table);
             } 
         }
+        for(var i=0; i<7; i++){
+            max = 0;
+            var ya = false;
+            for(var j=0; j<fila; j++){
+                var juntos = 0;
+                if(j<22){
+                    for(var l = j; l < j+5; l++){                                        
+                        if(nuevoArray[l][i] == ''){
+                            juntos++;
+                            if(juntos == 5){
+                                ya = true;
+                            }
+                        }else{
+                            juntos = 0;
+                        }
+                    }
+                }
+                if(ya == true && max < 5){
+                    for(var m = j; m<j+4; m++){
+                        nuevoArray[m][i]= 5;
+                        max++;
+                    }                
+                }
+            }
+        }
 
         // Distribuir las materias para cada día.
         let tempArray = [];
@@ -308,7 +364,7 @@ b.addEventListener('click', function(){
                 if(tempArray.every((element) => element.ponderacion <= 0) || tempArray.length == 0){
                     tempArray = copyArray(arrayMateriasSelected);
                 }
-                if(nuevoArray[j][i] == 0){
+                if(nuevoArray[j][i] == 5){
                     tempArray.sort(function(x, y){
                         if(x.ponderacion < y.ponderacion){
                             return -1;
@@ -332,7 +388,8 @@ b.addEventListener('click', function(){
         temporal.sort();
       //  console.log(temporal);        
         let space = 0;
-        for(var j= 0; j< fila; j++){            
+        for(var j = 0; j< fila; j++){
+                      
             if (isNaN(nuevoArray[j][k])){
                 if(space <temporal.length){
                 nuevoArray[j][k] = temporal[space];
@@ -398,6 +455,10 @@ function send2(){
             console.log(data.msg); // 'OK'
         },
     });
-    three.classList.add('pantallaOff');
-    b.classList.add('pantallaOff');
+    //three.classList.add('pantallaOff');
+    //b.classList.add('pantallaOff');
+    //location.reload(true);
+    setTimeout(function() {
+        location.reload(true);
+    }, 300);    
 }
