@@ -51,7 +51,7 @@ function table(e){
 		let field = e.target;
 		field.behaviour = valor;
 		nuevoArray[parseInt(field.className)][field.cellIndex-1] = field.behaviour;
-		if (valor == 0){
+		if (valor == ''){
             field.style.backgroundColor = 'white';
         }
         else if (valor == 1){
@@ -88,24 +88,24 @@ function table(e){
 
 function activate (accion){
         if (accion == 'red'){
-            if (valor == 0 || valor == 1){
+            if (valor == '' || valor == 1){
                 valor = 2;            
             }else{
-                valor = 0;
+                valor = '';
                            
            }
         }else if (accion == 'blue'){
-            if (valor == 2 || valor == 0){
+            if (valor == 2 || valor == ''){
                 valor = 1;            
             }else{
-                valor = 0;       
+                valor = '';       
            }
         }else if (accion == 'white'){
             if (valor == 1 || valor == 2){
-                valor = 0;
+                valor = '';
                 
             }else{
-                valor = 0;
+                valor = '';
                 
             }
            }else if (accion == 'clear'){
