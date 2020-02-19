@@ -7,7 +7,8 @@ const UserSchema = new mongoose.Schema({
     password: String,
     firstHorario: {type: Boolean, default: true},
     horario: String,
-    seleccionado: {type: String, default: 'nada'}
+    seleccionado: {type: String, default: 'nada'},
+    especialidad: String
 });
 
 UserSchema.plugin(passportLocalMongoose);

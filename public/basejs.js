@@ -460,5 +460,5 @@ function send2(){
     //location.reload(true);
     setTimeout(function() {
         location.reload(true);
-    }, 300);    
+    }, 1000);    
 }

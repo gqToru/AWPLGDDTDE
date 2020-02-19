@@ -5,7 +5,8 @@ var express         = require('express'),
       mongoose      = require('mongoose'),
       passport      = require('passport'),
       LocalStrategy = require('passport-local'),
-      User          = require('./models/user')
+      User          = require('./models/user'),
+      Carrera          = require('./models/carrera')
       mongoose.set('useFindAndModify', false);
 
 var saludo = "no";
@@ -73,7 +74,7 @@ app.get('/registro', function(req,res){
 })
 
 app.post('/registro', function(req,res){
-    const newUser = new User({username: req.body.username, nombreUsuario: req.body.nombreUsuario, firstHorario: true});
+    const newUser = new User({username: req.body.username, nombreUsuario: req.body.nombreUsuario, especialidad: req.body.especialidad, firstHorario: true});
    User.register(newUser, req.body.password, function(err, user){
        if(err){
            console.log(err);
@@ -120,13 +121,12 @@ app.post('/ajaxRoute2', (req,res)=>{
     });
 });
 
-app.get('/test',function(req,res){
-
-    console.log(saludo)           
-    console.log(saludo2)    
-   
-});
-
+// ID POR SERVIDOR
+app.get('/test',function(req,res){  
+    Carrera.findById('5e4d774e26e83f1788a4ca30', function (err, carreras) {
+      console.log('hola');
+    });        
+    });
 
 app.get('/index', isLoggedIn, function(req,res){
     if(req.user.seleccionado != 'nada'){
