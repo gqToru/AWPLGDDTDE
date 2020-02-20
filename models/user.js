@@ -5,7 +5,6 @@ const UserSchema = new mongoose.Schema({
     username: String,
     nombreUsuario: String,
     password: String,
-    firstHorario: {type: Boolean, default: true},
     horario: String,
     seleccionado: {type: String, default: 'nada'},
     especialidad: String

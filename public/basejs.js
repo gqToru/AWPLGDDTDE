@@ -35,18 +35,18 @@ testo.addEventListener('mouseup', function(){
 
 var mouseState = {'mousedown': false, 'mouseup': false};
 
+
+// ========== CAMBIOS PARA SOLUCIONAR EL (BUG) FEATURE
 for (var i = 0; i < casilla.length; i++){
     if (i % 8 != 0){
-    	['mouseover', 'mousedown', 'mouseup'].forEach(event => casilla[i].addEventListener(event, function(e){
-    		mouseState[e.type] = e.type == 'mousedown' || e.type == 'mouseup';
-    		table(e);
-    	}));
-    	//casilla[i].addEventListener('mouseover', table);
+    	['mouseover', 'mousedown', 'mouseup'].forEach(event => casilla[i].addEventListener(event, table
+    	));
     } 
 }
 
 
 function table(e){
+	mouseState[e.type] = e.type == 'mousedown' || e.type == 'mouseup';
 	if(mouseState.mousedown == true && mouseState.mouseup == false){
 		let field = e.target;
 		field.behaviour = valor;
@@ -64,6 +64,8 @@ function table(e){
 	else{
 		mouseState = {'mousedown': false, 'mouseup': false};
 	}
+
+}
 		/*
 		console.log(e);
         if(respond == 1){
@@ -81,8 +83,6 @@ function table(e){
         };
         }
         */
-
-}
 
 // ================= AQUI TERMINAN ==================
 
@@ -323,12 +323,12 @@ b.addEventListener('click', function(){
         three.classList.add('pantallaOn');
         b.addEventListener('click', send);
         b.addEventListener('click', send2);
-        
+
         
         for (var i = 0; i < casilla.length; i++){
-            if (i > 8 && i!= 16 && i!= 24 && i!= 32 && i!= 40 && i!= 48 && i!= 56 && i!= 64 && i!= 72){
-                casilla[i].removeEventListener('mouseover', table);
-            } 
+            if (i % 8 != 0){
+                ['mouseover', 'mouseup', 'mousedown'].forEach(event => casilla[i].removeEventListener(event, table));
+            }
         }
         for(var i=0; i<7; i++){
             max = 0;

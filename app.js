@@ -74,7 +74,7 @@ app.get('/registro', function(req,res){
 })
 
 app.post('/registro', function(req,res){
-    const newUser = new User({username: req.body.username, nombreUsuario: req.body.nombreUsuario, especialidad: req.body.especialidad, firstHorario: true});
+    const newUser = new User({username: req.body.username, nombreUsuario: req.body.nombreUsuario, especialidad: req.body.especialidad, horario: ''});
    User.register(newUser, req.body.password, function(err, user){
        if(err){
            console.log(err);
@@ -90,7 +90,7 @@ app.post('/ajaxRoute', (req,res)=>{
     saludo = req.body.arrayBox;
     var lol = req.user.username;
     const filter = { username: `${lol}` }
-    const update = { horario: saludo, firstHorario: false }
+    const update = { horario: saludo }
     var y = JSON.parse(saludo);
     res.status(200).json({msg:'OK'});
    // console.log(saludo);
@@ -120,6 +120,24 @@ app.post('/ajaxRoute2', (req,res)=>{
         //console.log(doc);
     });
 });
+app.put('/ajaxRoute3', (req,res)=>{
+    console.log('holi');
+    time = '';
+    var lol = req.user.username;
+    const filter = { username: `${lol}` }
+    const update = { horario: time}
+    res.status(200).json({msg:'OK'});
+   // console.log(saludo);
+   // console.log(update);
+   // console.log(filter);
+    User.findOneAndUpdate(filter, update, function(err, doc){
+        if(err){
+            console.log("Something wrong when updating data!"+ err.message);
+        }
+    
+        //console.log(doc);
+    });
+});
 
 // ID POR SERVIDOR
 app.get('/test',function(req,res){  
@@ -129,7 +147,7 @@ app.get('/test',function(req,res){
     });
 
 app.get('/index', isLoggedIn, function(req,res){
-    if(req.user.seleccionado != 'nada'){
+    if(req.user.horario != ''){
     var x = JSON.parse(req.user.seleccionado);
     var y = JSON.parse(req.user.horario);
     console.log(x)

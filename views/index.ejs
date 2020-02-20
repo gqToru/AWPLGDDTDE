@@ -4,14 +4,17 @@
     <div><img src="/img/logo1.png" id="brandLogo" alt=""><a href="/index" class="navbar-brand">AidUDO</a></div>
     
         <div class="navbar-nav">
-            <a href="/index" class="nav-link">Conectado como: <%= currentUser.nombreUsuario %></a>
+            <div id="topuser">
+            <a href="/index" class="nav-link">Conectado como</a>
+            <a href="/index" class="nav-link"><%= currentUser.username %></a>
+            </div>
         
         
             <a href="/logout" class="nav-link">Desconectarse</a>
         
         </div>
 </nav>
-<% if(currentUser.firstHorario == true){ %>
+<% if(currentUser.horario == ''){ %>
     <%- include('partials/selections'); -%>
 <% }else{ %>
     <%- include('partials/dashboard'); -%>

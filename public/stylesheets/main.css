@@ -142,6 +142,35 @@ hr{
     border-radius: 24px;
     transition: 0.25s;
 }
+#topd{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+    border-bottom: 1px solid #343a40;
+}
+#topd h1{
+    margin: 0;
+}
+#topd div{
+    display: flex;
+    flex-direction: row;
+}
+#topd div div{
+    padding: 5px;
+    background-color:#343a40;
+    border-radius: 5px;
+    color: #e9ecef;
+    font-weight: bold;
+    margin-right: 5px;    
+}
+#topd div div:hover{    
+    cursor: pointer;
+    background-color: #495057;
+    color: #f1f3f5;
+}
+
 .box select{
     background-color: white;
     color: #212529;
@@ -282,6 +311,29 @@ hr{
     border-radius: 10px;
     background: linear-gradient(145deg, #e6e6e6, #ffffff);
 }
+#topuser{
+    display: flex;
+    flex-direction: column;   
+    justify-content: left; 
+}
+
+#midd{
+    margin-top: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #e6e6e6;
+    box-shadow:  20px 20px 60px #c4c4c4, 
+             -20px -20px 60px #ffffff;
+}
+#midd h2{
+    margin-top: 0;
+}
+#midd ul{
+    margin-bottom: 0;
+}
+#midd li{
+    padding: 5px;
+}
 #yy{
     display: none;
 }
@@ -343,6 +395,16 @@ hr{
 h2, h3{
     text-align: center;
     font-variant: small-caps;
+}
+.divs4 h2:first-child{
+    text-align: left;
+}
+.divs4 > h2{
+    margin-bottom: 0;
+}
+
+b{
+    font-size: 0.75rem;
 }
 table{
     background-color:#343a40;

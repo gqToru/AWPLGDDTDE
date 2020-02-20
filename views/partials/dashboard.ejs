@@ -1,17 +1,24 @@
 
 <div class="divs4">
-    <h1>Bienvenido <%= currentUser.nombreUsuario %>!</h1> 
-    <div>
-        <h2>Este semestre estas cursando:</h2>
+    <div id="topd">
+        <h1>Bienvenido <%= currentUser.nombreUsuario %>!</h1>
+        <div>        
+        <div id="improtancia">Editar importancia</div>
+        <div id="dias">Editar dias</div>
+        <div id="cambiar">Reiniciar horario</div> 
+        </div>
+    </div>    
+    <div id="midd">
+        <h2>este semestre estas cursando:</h2>
         <ul> 
         <% mostrar.map((x)=>{%>
-          <li><b><%= x.nombre %> </b>(<b><%= x.codigo %></b>)</li>
+          <li><span><%= x.nombre %> </span><b>(<%= x.codigo %>)</b></li>
         <%}) %>
        </ul>
     </div>    
     <br>
     <br>
-    <h2>Horario Inscrito:</h2>
+    <h2>horario generado:</h2>
     <br>
     <p id='yy'><%= currentUser.horario %></p>
     <table id='thirdTable'>
@@ -286,7 +293,7 @@
           <td class='25 finalT' data-behaviour=' '></td>
       </tr>        
   </table>
-    <script>
+    <script>        
         var x = document.getElementById('yy').innerText;
         x = JSON.parse(x);
         var y = document.getElementsByClassName('finalT');
@@ -304,5 +311,23 @@
             value++;
           }
         }
+        function send3(){    
+       console.log('jeje');
+        $.ajax({
+        url : "/ajaxRoute3",
+        type: "PUT"
+        
+    });
+    //three.classList.add('pantallaOff');
+    //b.classList.add('pantallaOff');
+    //location.reload(true);
+    setTimeout(function() {
+        location.reload(true);
+    }, 1000);    
+}
+
+        
+        var c = document.getElementById('cambiar');
+        c.addEventListener('click', send3);
     </script>
 </div>
