@@ -163,6 +163,8 @@ hr{
     border-radius: 5px;
     color: #e9ecef;
     font-weight: bold;
+    display: flex;
+    align-items: center;
     margin-right: 5px;    
 }
 #topd div div:hover{    
@@ -170,7 +172,13 @@ hr{
     background-color: #495057;
     color: #f1f3f5;
 }
-
+#topd div div:last-child{
+    background-color: #087f5b;
+}
+#topd div div:hover:last-child{
+    background-color: #099268;
+    color: #f1f3f5;
+}
 .box select{
     background-color: white;
     color: #212529;
