@@ -128,7 +128,7 @@ hr{
     margin-top: 20px;
 }
 
-.box input[type = 'text'], .box input[type = 'password'], .box select{
+.box input[type = 'text'], .box input[type = 'password'], .box input[type='email'], .box select{
     border: 0;
     background: none;
     display: block;
@@ -184,6 +184,10 @@ hr{
     color: #212529;
 }
 
+.boxregistro{
+    margin-top: 20px;
+}
+
 .box input[type = 'text']:focus, .box input[type = 'password']:focus{
     width: 280px;
     border-color: #2ecc71;
@@ -207,7 +211,7 @@ hr{
     font-size: 1em;
 }
 
-.box a{
+.box #boton_registro{
     border: 0;
     background: none;
     display: inline;
@@ -223,7 +227,7 @@ hr{
     cursor: pointer;
 }
 
-.box a:hover{
+.box #boton_registro:hover{
     background: #036ffc;
 }
 
@@ -253,6 +257,10 @@ hr{
 
 .navbar-background{
     background: #2d3037;
+}
+
+.box span{
+    color: #FFD529;
 }
 
 

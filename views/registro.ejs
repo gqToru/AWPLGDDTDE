@@ -1,10 +1,11 @@
 <%- include('partials/header'); -%>
 
 
-<form class="box" action="/registro" method="POST">
+<form class="box boxregistro" action="/registro" method="POST">
     <h1>aidUDO</h1>
     <img class="boxlogo" src="/img/logo1.png" alt="">
     <input required type="text" name="username" placeholder="Usuario">
+    <input required type="email" name="email" placeholder="Correo@Ejemplo.com">
     <input type="text" required name="nombreUsuario" placeholder="Nombre y Apellido">
     <input required type="password" name="password" placeholder="Contraseña">
     <select name="especialidad" id="select">
