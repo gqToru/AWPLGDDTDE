@@ -6,7 +6,7 @@
         <div id="improtancia">Editar importancia</div>
         <div id="dias">Editar dias</div>
         <div id="cambiar">Reiniciar horario</div> 
-        <div id="imprimir">Imprimir</div>
+        <div id="imprimir" onclick="window.print()">Imprimir</div>
         </div>
     </div>    
     <div id="midd">
@@ -19,9 +19,10 @@
     </div>    
     <br>
     <br>
-    <h2>horario generado:</h2>
+    <h2>horario generado</h2>
     <br>
     <p id='yy'><%= currentUser.horario %></p>
+    <p id='libros'><%= currentUser.seleccionado %></p>
     <table id='thirdTable'>
       <tr>
           <td>Hora</td>
@@ -294,6 +295,10 @@
           <td class='25 finalT' data-behaviour=' '></td>
       </tr>        
   </table>
+  <h2>libros disponibles</h2>
+  <div id="seccionlibros">
+
+  </div>
     <script>        
         var x = document.getElementById('yy').innerText;
         x = JSON.parse(x);
@@ -312,6 +317,33 @@
             value++;
           }
         }
+        var lolo = document.getElementById('libros').innerText;
+        var seccionlibros = document.getElementById('seccionlibros');
+        seccionlibros.classList.add("seclib")
+        var nuevoslibros = document.createDocumentFragment();
+        lolo = JSON.parse(lolo);
+        for(var i = 0; i<lolo.length; i++){
+            var nombresm = document.createElement('p');
+            console.log(lolo[i].nombre);            
+            nuevoslibros.appendChild(nombresm);
+            nombresm.classList.add('nombrem')
+            nombresm.innerHTML = lolo[i].nombre;
+            if (lolo[i].libros != undefined){
+                lib = lolo[i].libros;
+                for (var j = 0; j<lib.length; j++){
+                    var nombresl = document.createElement('a');
+                    console.log(lib[j])
+                    nuevoslibros.appendChild(nombresl);
+                    nombresl.setAttribute('href', 'https://www.google.com/search?q='+lib[j]);   
+                    nombresl.setAttribute('target', '_blank');
+                    nombresl.classList.add('nombrel')
+                    nombresl.innerHTML = lib[j];
+                }
+            }
+
+        }
+        seccionlibros.appendChild(nuevoslibros);    
+        console.log(seccionlibros);
         function send3(){    
        console.log('jeje');
         $.ajax({

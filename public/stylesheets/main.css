@@ -29,7 +29,7 @@ a{
 .navbar-nav{
     display: flex;
     flex-direction: row;
-    width: 300px;
+    width: 400px;
     justify-content: space-between;
     align-items: center;
 }
@@ -350,7 +350,7 @@ hr{
 #midd li{
     padding: 5px;
 }
-#yy{
+#yy, #libros{
     display: none;
 }
 #first{
@@ -485,4 +485,30 @@ user-select: none;
 .selector div:hover{
     background-color: #dee2e6;
     cursor: pointer;
+}
+.nombrem{
+    font-weight: bold;
+}
+.nombrel{
+    color: black;
+    display: block;
+    margin-bottom: 1em;
+    font-weight: lighter;
+}
+
+.nombrel:hover{
+    color: #2b8a3e;
+}
+.nombrel:hover::after{
+    content: 'Buscar en Google';
+    color: blue;
+    font-size: 0.8em;
+}
+.seclib{
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    background: #e6e6e6;
+    box-shadow:  20px 20px 60px #c4c4c4, 
+             -20px -20px 60px #ffffff;
 }

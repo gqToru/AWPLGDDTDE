@@ -1,0 +1,30 @@
+.seclib{
+    box-shadow: none;
+    padding: 0px;
+}
+#midd{
+    box-shadow: none;
+}
+#improtancia, #dias, #cambiar, #imprimir, .nav-link{
+    display: none !important;
+}
+.divs4{
+    margin-top: 0px;
+    padding: 0px;
+}
+h2{
+    margin: 10px;
+}
+br{
+    display: none;
+}
+table{
+    -webkit-print-color-adjust: exact; 
+}
+#seccionlibros{
+    margin: 0px;
+    padding: 0px;
+}
+.navbar-brand{
+    color: black;
+}

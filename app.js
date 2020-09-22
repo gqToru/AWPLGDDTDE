@@ -70,7 +70,8 @@ app.post('/login', passport.authenticate('local',
 });
 
 app.get('/registro', function(req,res){
-    res.render('registro')
+    
+    res.render('registro');
 })
 
 app.post('/registro', function(req,res){
@@ -85,6 +86,11 @@ app.post('/registro', function(req,res){
        });
    });
 });
+
+app.get('/config', function(req,res){
+    res.render('config')
+})
+
 
 app.post('/ajaxRoute', (req,res)=>{
     saludo = req.body.arrayBox;
