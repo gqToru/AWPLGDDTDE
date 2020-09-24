@@ -512,3 +512,53 @@ user-select: none;
     box-shadow:  20px 20px 60px #c4c4c4, 
              -20px -20px 60px #ffffff;
 }
+
+.wrapperImportance{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: .5rem;
+}
+.importanceMateria{
+    width: 90%;
+    min-height: 140px;
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    background: #ced4da;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.delete{
+    background-color: #dee2e6;
+    width: 20%;
+    border-radius: 0px 20px 20px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.delete::after{
+    content: 'X';
+    font-size: 2em;
+}
+.delete:hover{
+    transition: .3s;
+    background-color: #c92a2a;
+    color: white;
+}
+.info{
+    width: 80%;
+    padding: 15px;
+    background-color: #dee2e6;
+    border-radius: 20px 0px 0px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.checkImportance{
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+}

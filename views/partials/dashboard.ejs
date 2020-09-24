@@ -1,5 +1,6 @@
-
-<div class="divs4">
+<p id='yy'><%= currentUser.horario %></p>
+<p id='libros'><%= currentUser.seleccionado %></p>
+<div class="divs4" id="erasenext">
     <div id="topd">
         <h1>Bienvenido <%= currentUser.nombreUsuario %>!</h1>
         <div>        
@@ -20,9 +21,7 @@
     <br>
     <br>
     <h2>horario generado</h2>
-    <br>
-    <p id='yy'><%= currentUser.horario %></p>
-    <p id='libros'><%= currentUser.seleccionado %></p>
+    <br>    
     <table id='thirdTable'>
       <tr>
           <td>Hora</td>
@@ -317,19 +316,19 @@
             value++;
           }
         }
-        var lolo = document.getElementById('libros').innerText;
+        var mSelected = document.getElementById('libros').innerText;
         var seccionlibros = document.getElementById('seccionlibros');
         seccionlibros.classList.add("seclib")
         var nuevoslibros = document.createDocumentFragment();
-        lolo = JSON.parse(lolo);
-        for(var i = 0; i<lolo.length; i++){
+        mSelected = JSON.parse(mSelected);
+        for(var i = 0; i<mSelected.length; i++){
             var nombresm = document.createElement('p');
-            console.log(lolo[i].nombre);            
+            console.log(mSelected[i].nombre);            
             nuevoslibros.appendChild(nombresm);
             nombresm.classList.add('nombrem')
-            nombresm.innerHTML = lolo[i].nombre;
-            if (lolo[i].libros != undefined){
-                lib = lolo[i].libros;
+            nombresm.innerHTML = mSelected[i].nombre;
+            if (mSelected[i].libros != undefined){
+                lib = mSelected[i].libros;
                 for (var j = 0; j<lib.length; j++){
                     var nombresl = document.createElement('a');
                     console.log(lib[j])
@@ -357,10 +356,363 @@
     setTimeout(function() {
         location.reload(true);
     }, 1000);    
+}    
+    var c = document.getElementById('cambiar');
+    c.addEventListener('click', send3);
+
+    var parento = document.getElementById('erasenext');
+    var eday = document.getElementById('dias');
+    var topd = document.getElementById('topd');
+    var midd = document.getElementById('midd');
+    var table = document.getElementById('thirdTable');
+    var brs = document.getElementsByTagName('br');
+    var h2 = document.getElementsByTagName('h2');
+    var botonsend = document.createElement('div');
+    var botonback = document.createElement('div');
+    var botondiv = document.createElement('div');
+    var divbox = document.createElement('div');   
+
+    //declaracion global pa vainas 
+    var casilla = document.getElementsByTagName('td');
+var valor = 0;
+var arrayMateriasSelected = [];
+var fila = 26;
+var respond = 0;
+        var mouseState = {'mousedown': false, 'mouseup': false};
+        var nuevoArray = new Array(fila);
+//Bucle para meter en cada posición otros array de 7
+for(var i=0; i<fila; i++) {
+    nuevoArray[i] = new Array(7);
 }
 
+for(var i=0; i<fila; i++){
+    for(var j=0; j<7; j++){
+        nuevoArray[i][j]= '';
+    }
+}
+function activate (accion){
+        if (accion == 'red'){
+            if (valor == '' || valor == 1){
+                valor = 2;            
+            }else{
+                valor = '';
+                           
+           }
+        }else if (accion == 'blue'){
+            if (valor == 2 || valor == ''){
+                valor = 1;            
+            }else{
+                valor = '';       
+           }
+        }else if (accion == 'white'){
+            if (valor == 1 || valor == 2){
+                valor = '';
+                
+            }else{
+                valor = '';
+                
+            }
+           }else if (accion == 'clear'){
+               for (var i = 0; i < casilla.length; i++){
+                   if(i % 8 != 0 && i > 8 && i !=217 && i !=218 && i !=219 && i !=220 && i !=221 && i !=222 && i !=223){                       
+                   casilla[i].style.backgroundColor = 'white';
+                }
+               }
+
+                   for(var i=0; i<fila; i++){
+                    for(var j=0; j<7; j++){
+                        nuevoArray[i][j]= '';
+                    }
+                }
+                   
+               
+           }
+           if (valor == 1){
+            trabajo.style.color = 'black';
+            estudio.style.color = '#228be6';
+            libre.style.color = 'black';
+           }else if (valor == 2){
+            trabajo.style.color = '#fa5252';
+            estudio.style.color = 'black';
+            libre.style.color = 'black';
+           }else{
+            trabajo.style.color = 'black';
+            estudio.style.color = 'black';
+            libre.style.color = '#51cf66';
+           }
+           //console.log('activado:' + valor);
+    }
+
+    //declaracion global  pa cambiar dias
+
+    eday.addEventListener('click', function(){
+        console.log("editday");
+        parento.removeChild(topd);
+        parento.removeChild(midd);
+        parento.removeChild(seccionlibros);
+        parento.appendChild(divbox);
+        divbox.classList.add('selector');
+        divbox.style.order = '-1';
+        var wrapper = document.getElementsByClassName('divs4');
+        wrapper[0].style.display = 'flex';
+        wrapper[0].style.flexDirection = 'column';
+        var fragmentED = document.createDocumentFragment();
+        for(var i=0; i < 4; i++){
+            var divboxfragment = document.createElement('div');
+            fragmentED.appendChild(divboxfragment);
+            if(i == 0){
+                divboxfragment.setAttribute('id', 'trabajo');
+                divboxfragment.setAttribute('onclick', "activate('red')");
+                divboxfragment.innerHTML = 'trabajo';
+            }else if(i == 1){
+                divboxfragment.setAttribute('id', 'estudio');
+                divboxfragment.setAttribute('onclick', "activate('blue')");
+                divboxfragment.innerHTML = 'clases';    
+            }else if (i == 2){
+                divboxfragment.setAttribute('id', 'libre');
+                divboxfragment.setAttribute('onclick', "activate('white')");
+                divboxfragment.innerHTML = 'borrar';
+            }else if (i == 3){
+                divboxfragment.setAttribute('id', 'limpiar');
+                divboxfragment.setAttribute('onclick', "activate('clear')");
+                divboxfragment.innerHTML = 'reiniciar';
+            }     
+        }
+        divbox.appendChild(fragmentED);
+        var wrapperbuton = document.createDocumentFragment();
+        botondiv.appendChild(botonback);
+        botonback.classList.add('bFinal');
+        botonback.style.margin = '10px';
+        botonback.innerHTML = "salir"
+        botonback.addEventListener('click', function(){
+            setTimeout(function() {
+                location.reload(true);
+            }, 1000);
+        });
+        botondiv.appendChild(botonsend);
+        botonsend.classList.add('bFinal');
+        botonsend.style.margin = '10px';
+        botonsend.innerHTML = ">";
+        wrapperbuton.appendChild(botondiv);
+        botondiv.style.display = 'flex';
+        botondiv.style.flexDirection = 'row';
+        botondiv.style.justifyContent = 'center';
+        parento.appendChild(wrapperbuton);        
+        for (var i = 0; i < mSelected.length; i++){
+            mSelected[i].ponderacion = 0;
+        }        
+        let cont = 0;
+        for (var i = 0; i<3; i++){
+            parento.removeChild(brs[0]);
+        }
+        for (var i = 0; i<2; i++){
+            parento.removeChild(h2[0]);
+        }
+        /*for (var i = 0; i<y.length; i++){            
+                
+                if(y[i].style.backgroundColor == 'rgb(34, 139, 230)'){
+                    console.log('azul, posicion:' +i);
+                    nuevoArray[cont][]                    
+                }
+            if(i % 6 == 1){
+                cont ++;
+            }    
+        }*/
+        for(var i=0; i<fila; i++){
+         for(var j=0; j<7; j++){
+            y[cont].innerHTML = '';
+                if(y[cont].style.backgroundColor == 'rgb(34, 139, 230)'){
+                    nuevoArray[i][j] = 1;                  
+                }else if(y[cont].style.backgroundColor == 'rgb(250, 82, 82)'){
+                    nuevoArray[i][j] = 2;                  
+                }
+                cont++;
+            }
+            
+        }         
+        // INTENTO DE CAMBIAR DIAS 
         
-        var c = document.getElementById('cambiar');
-        c.addEventListener('click', send3);
+// ========== CAMBIOS PARA SOLUCIONAR EL (BUG) FEATURE
+for (var i = 0; i < casilla.length; i++){
+    if (i % 8 != 0){
+    	['mouseover', 'mousedown', 'mouseup'].forEach(event => casilla[i].addEventListener(event, table
+    	));
+    } 
+}
+
+
+function table(e){
+	mouseState[e.type] = e.type == 'mousedown' || e.type == 'mouseup';
+	if(mouseState.mousedown == true && mouseState.mouseup == false){
+		let field = e.target;
+		field.behaviour = valor;
+		nuevoArray[parseInt(field.className)][field.cellIndex-1] = field.behaviour;
+		if (valor == ''){
+            field.style.backgroundColor = 'white';
+        }
+        else if (valor == 1){
+            field.style.backgroundColor = '#228be6';
+        }
+        else{
+            field.style.backgroundColor = '#fa5252';
+        };
+	}
+	else{
+		mouseState = {'mousedown': false, 'mouseup': false};
+	}
+
+}
+    botonsend.addEventListener('click', function(){
+        console.log('sad')
+        for (var i=0; i < mSelected.length; i++){
+            mSelected[i].calcPonderacion = function(){
+                this.ponderacion = 40 + this.importancia*15  + this.evaluacion*5 + this.creditos*5 - 10*this.included;
+            }            
+        }         
+        mSelected.calcPonderacion();
+    
+    })
+
+
+
+
+    });
+    function borrarDashboard(){
+        parento.removeChild(topd);
+        parento.removeChild(midd);
+        parento.removeChild(seccionlibros);
+        parento.removeChild(table);
+        for (var i = 0; i<3; i++){
+            parento.removeChild(brs[0]);
+        }
+        for (var i = 0; i<2; i++){
+            parento.removeChild(h2[0]);
+        }
+        var wrapperbuton = document.createDocumentFragment();
+        botondiv.appendChild(botonback);
+        botonback.classList.add('bFinal');
+        botonback.style.margin = '10px';
+        botonback.innerHTML = "salir"
+        botonback.addEventListener('click', function(){
+            setTimeout(function() {
+                location.reload(true);
+            }, 1000);
+        });
+        botondiv.appendChild(botonsend);
+        botonsend.classList.add('bFinal');
+        botonsend.style.margin = '10px';
+        botonsend.innerHTML = ">";
+        wrapperbuton.appendChild(botondiv);
+        botondiv.style.display = 'flex';
+        botondiv.style.flexDirection = 'row';
+        botondiv.style.justifyContent = 'center';
+        parento.appendChild(wrapperbuton);
+    }
+    
+    var eimportance = document.getElementById('improtancia');
+    eimportance.addEventListener('click', function(){
+        console.log("editimportance");
+        borrarDashboard();
+        nuevoArray = x;
+        for(var i=0; i<fila; i++){
+            for(var j=0; j<7; j++){
+                if(nuevoArray[i][j] != '' && isNaN(nuevoArray[i][j])){
+                    nuevoArray[i][j] = '';
+                }
+            }
+        }
+        let divWrapper = document.createElement('div');                 
+        let importanceFragment = document.createDocumentFragment();
+        importanceFragment.appendChild(divWrapper);
+        divWrapper.classList.add('wrapperImportance');
+        for (var i = 0; i < mSelected.length; i++){
+            let divMateria = document.createElement('div');
+            let divLeft = document.createElement('div');
+            let name = document.createElement('h4');
+            let divCheckbox = document.createElement('div');
+            let divErase = document.createElement('div');
+            let explanation = document.createElement('h6');
+            divWrapper.appendChild(divMateria);
+            divMateria.classList.add('importanceMateria')
+            divMateria.setAttribute('id', 'materia' + i);
+            divMateria.appendChild(divLeft);
+            divLeft.classList.add('info');
+            divLeft.appendChild(name);
+            name.style.marginTop = '0px';
+            name.innerText = mSelected[i].nombre + " (" + mSelected[i].codigo + ")";
+            divLeft.appendChild(explanation);
+            explanation.innerText = '- Importancia personal +';
+            explanation.style.margin = '0px';
+            divLeft.appendChild(divCheckbox);
+            divCheckbox.classList.add('checkImportance');
+            divCheckbox.setAttribute('pulse', i);
+            var intensityText = -3;
+            var fragmentcheck = document.createDocumentFragment();
+            for (var j=0; j<5; j++){
+                let intensity = document.createElement('input');
+                intensity.style.width = '20px'
+                intensity.style.height = '20px'
+                intensity.style.margin = '2px'
+                intensity.style.display = 'inline-block';
+                intensity.setAttribute('type', 'radio')
+                intensity.setAttribute('name', 'checkboxgroup'+i);
+                intensity.setAttribute('name', 'checkboxgroup'+i);
+                intensity.style.textAlign = 'center';
+                intensity.style.border = '1px black solid'
+                intensity.classList.add('intensity');
+                intensityText = intensityText+1;
+                intensity.innerHTML = intensityText;
+                intensity.setAttribute('intense', intensityText);
+                if(mSelected[i].importancia == intensity.innerText){
+                    intensity.setAttribute('checked', '');
+                }
+                fragmentcheck.appendChild(intensity);
+             }  
+            divCheckbox.appendChild(fragmentcheck);
+            divMateria.appendChild(divErase);
+            divErase.classList.add('delete');
+            divErase.setAttribute('pulse', i);
+            divErase.addEventListener('click', function(){
+                var del = document.getElementsByClassName('wrapperImportance');
+                var contador = document.getElementsByClassName('delete');
+                var contadorCheckbox = document.getElementsByClassName('checkImportance');
+                if(contador.length > 1){                
+                del[0].removeChild(this.parentElement);
+                var restante = contador.length;
+                for (var i = 0; i< restante; i++){
+                    contador[i].setAttribute('pulse', i);
+                    contadorCheckbox[i].setAttribute('pulse', i);
+                }
+                console.log(restante);
+                mSelected.splice(this.attributes.pulse.value, 1);
+                console.log(mSelected);
+                }else{
+                    alert('No se puede borrar la ultima materia, si quieres rehacer el horario: En el dashboard encontraras un boton que dice "Reiniciar horario"');
+                }
+            });
+        }
+        parento.appendChild(importanceFragment);
+        let botonSend = document.getElementsByClassName('bFinal');
+        botonSend = botonSend[1];
+        botonSend.addEventListener('click', function(){
+            var contadorCheckbox = document.getElementsByClassName('checkImportance');
+            for(var i = 0; i < contadorCheckbox.length; i++){
+                for (var j = 0; j< 5; j++){
+                    if(contadorCheckbox[i].childNodes[j].checked == true){
+                        mSelected[i].importancia = parseInt(contadorCheckbox[i].childNodes[j].attributes.intense.value);
+                    }
+                }
+            }
+            console.log(mSelected);
+            
+        })             
+    });
+    var econfiguracion = document.getElementById('configu');
+    econfiguracion.style.cursor = "pointer"
+    econfiguracion.addEventListener('click', function(){
+        console.log("editCONFIG");
+        borrarDashboard();
+       
+    });
     </script>
 </div>

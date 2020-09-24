@@ -274,7 +274,6 @@ function construirMateria(){
     }
 }
 construirMateria();
-
 b.addEventListener('click', function(){
     if (one.className == 'pantallaOn'){
         one.classList.remove('pantallaOn');
