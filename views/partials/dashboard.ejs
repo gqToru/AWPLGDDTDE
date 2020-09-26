@@ -498,9 +498,6 @@ function activate (accion){
         botondiv.style.flexDirection = 'row';
         botondiv.style.justifyContent = 'center';
         parento.appendChild(wrapperbuton);        
-        for (var i = 0; i < mSelected.length; i++){
-            mSelected[i].ponderacion = 0;
-        }        
         let cont = 0;
         for (var i = 0; i<3; i++){
             parento.removeChild(brs[0]);
@@ -563,14 +560,68 @@ function table(e){
 
 }
     botonsend.addEventListener('click', function(){
-        console.log('sad')
-        for (var i=0; i < mSelected.length; i++){
-            mSelected[i].calcPonderacion = function(){
-                this.ponderacion = 40 + this.importancia*15  + this.evaluacion*5 + this.creditos*5 - 10*this.included;
-            }            
-        }         
-        mSelected.calcPonderacion();
-    
+        for(var i=0; i< mSelected.length; i++){
+                mSelected[i].calcPonderacion = function(){
+                    this.ponderacion = 40 + this.importancia*15  + this.evaluacion*5 + this.creditos*5 - 10*this.included;
+                }
+            }
+            for(var i=0; i<7; i++){
+            var max = 0;
+            var ya = false;
+            for(var j=0; j<fila; j++){
+                var juntos = 0;
+                if(j<22){
+                    for(var l = j; l < j+5; l++){                                        
+                        if(nuevoArray[l][i] == ''){
+                            juntos++;
+                            if(juntos == 5){
+                                ya = true;
+                            }
+                        }else{
+                            juntos = 0;
+                        }
+                    }
+                }
+                if(ya == true && max < 5){
+                    for(var m = j; m<j+4; m++){
+                        nuevoArray[m][i]= 5;
+                        max++;
+                    }                
+                }
+            }
+        }                        
+      let tempArray = [];
+      let materiaToAssign;
+      for(let i=0; i < 7; i++){
+          for(let j=0; j < nuevoArray.length; j++){
+              if(tempArray.every((element) => element.ponderacion <= 0) || tempArray.length == 0){
+                  tempArray = copyArray(mSelected);
+                  console.log(tempArray) //ESTA FUNCION ESTA EN LA LINEA 433
+              }
+              if(nuevoArray[j][i] == 5){
+                  tempArray.sort(function(x, y){
+                      if(x.ponderacion < y.ponderacion){
+                          return -1;
+                      }
+                  });
+                  materiaToAssign = tempArray[tempArray.length-1];
+                  materiaToAssign.included += 1;
+                  materiaToAssign.calcPonderacion();
+                  console.log(materiaToAssign.nombre)
+                  nuevoArray[j][i] = materiaToAssign.nombre;
+              }
+          }
+      }
+      function copyArray(array){    
+          // Función para copiar el mSelected
+          let arrayReturned = [];
+          array.forEach(function(materia_element){
+              arrayReturned.push(Object.assign({}, materia_element));
+          });
+          return arrayReturned;
+      }
+      send();
+      send2();
     })
 
 
@@ -694,7 +745,7 @@ function table(e){
         parento.appendChild(importanceFragment);
         let botonSend = document.getElementsByClassName('bFinal');
         botonSend = botonSend[1];
-        botonSend.addEventListener('click', function(){
+        botonSend.addEventListener('click', function(){            
             var contadorCheckbox = document.getElementsByClassName('checkImportance');
             for(var i = 0; i < contadorCheckbox.length; i++){
                 for (var j = 0; j< 5; j++){
@@ -703,9 +754,71 @@ function table(e){
                     }
                 }
             }
-            console.log(mSelected);
-            
-        })             
+            for(var i=0; i< mSelected.length; i++){
+                mSelected[i].calcPonderacion = function(){
+                    this.ponderacion = 40 + this.importancia*15  + this.evaluacion*5 + this.creditos*5 - 10*this.included;
+                }
+            }
+            for(var i=0; i<7; i++){
+            var max = 0;
+            var ya = false;
+            for(var j=0; j<fila; j++){
+                var juntos = 0;
+                if(j<22){
+                    for(var l = j; l < j+5; l++){                                        
+                        if(nuevoArray[l][i] == ''){
+                            juntos++;
+                            if(juntos == 5){
+                                ya = true;
+                            }
+                        }else{
+                            juntos = 0;
+                        }
+                    }
+                }
+                if(ya == true && max < 5){
+                    for(var m = j; m<j+4; m++){
+                        nuevoArray[m][i]= 5;
+                        max++;
+                    }                
+                }
+            }
+        }                        
+      let tempArray = [];
+      let materiaToAssign;
+      for(let i=0; i < 7; i++){
+          for(let j=0; j < nuevoArray.length; j++){
+              if(tempArray.every((element) => element.ponderacion <= 0) || tempArray.length == 0){
+                  tempArray = copyArray(mSelected);
+                  console.log(tempArray) //ESTA FUNCION ESTA EN LA LINEA 433
+              }
+              if(nuevoArray[j][i] == 5){
+                  tempArray.sort(function(x, y){
+                      if(x.ponderacion < y.ponderacion){
+                          return -1;
+                      }
+                  });
+                  materiaToAssign = tempArray[tempArray.length-1];
+                  materiaToAssign.included += 1;
+                  materiaToAssign.calcPonderacion();
+                  console.log(materiaToAssign.nombre)
+                  nuevoArray[j][i] = materiaToAssign.nombre;
+              }
+          }
+      }
+      function copyArray(array){    
+          // Función para copiar el mSelected
+          let arrayReturned = [];
+          array.forEach(function(materia_element){
+              arrayReturned.push(Object.assign({}, materia_element));
+          });
+          return arrayReturned;
+      }
+      
+            console.log(nuevoArray);
+            send();
+        send2();    
+        })
     });
     var econfiguracion = document.getElementById('configu');
     econfiguracion.style.cursor = "pointer"
@@ -714,5 +827,43 @@ function table(e){
         borrarDashboard();
        
     });
+    function send(){
+         var testJson = JSON.stringify(nuevoArray);
+         console.log(testJson);
+        $.ajax({
+        url : "/ajaxRoute",
+        type: "POST",
+       dataType:'json',
+        data : {
+            arrayBox: testJson        
+        },
+        success: function(data){
+            console.log(data.msg); // 'OK'
+        },
+    });
+}
+
+function send2(){
+    var testJson2 = JSON.stringify(mSelected);
+    
+    console.log(testJson2);
+        $.ajax({
+        url : "/ajaxRoute2",
+        type: "POST",
+       dataType:'json',
+        data : {            
+            arraySelected: testJson2
+        },
+        success: function(data){
+            console.log(data.msg); // 'OK'
+        },
+    });
+    //three.classList.add('pantallaOff');
+    //b.classList.add('pantallaOff');
+    //location.reload(true);
+    setTimeout(function() {
+        location.reload(true);
+    }, 1000);    
+}
     </script>
 </div>
