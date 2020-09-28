@@ -562,3 +562,13 @@ user-select: none;
     display: flex;
     justify-content: space-between;
 }
+.hide{
+    display: none;
+}
+.cofigDiv{
+    background-color: #38d9a9;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+

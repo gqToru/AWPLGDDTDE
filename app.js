@@ -75,7 +75,7 @@ app.get('/registro', function(req,res){
 })
 
 app.post('/registro', function(req,res){
-    const newUser = new User({username: req.body.username, nombreUsuario: req.body.nombreUsuario, especialidad: req.body.especialidad, horario: ''});
+    const newUser = new User({username: req.body.username, nombreUsuario: req.body.nombreUsuario, especialidad: req.body.especialidad, email: req.body.email, horario: ''});
    User.register(newUser, req.body.password, function(err, user){
        if(err){
            console.log(err);
@@ -86,11 +86,6 @@ app.post('/registro', function(req,res){
        });
    });
 });
-
-app.get('/config', function(req,res){
-    res.render('config')
-})
-
 
 app.post('/ajaxRoute', (req,res)=>{
     saludo = req.body.arrayBox;
@@ -181,4 +176,48 @@ function isLoggedIn(req, res, next){
 /* puerto de acceso */
 app.listen(3000, function(){
     console.log('Server running...');
+});
+
+app.post('/ajaxRoute4', (req,res)=>{
+    var lol = req.user.username;
+    var filter = { username: `${lol}` };    
+    let configNombreUsuario = req.body.nombreUsuario;
+    var update = { nombreUsuario: configNombreUsuario };
+    User.findOneAndUpdate(filter, update, function(err, doc){
+        if(err){
+            console.log("Something wrong when updating data!"+ err.message);
+        }
+    
+        //console.log(doc);
+    });
+    let configEspecialidad = req.body.especialidad;
+    update = { especialidad: configEspecialidad };
+    User.findOneAndUpdate(filter, update, function(err, doc){
+        if(err){
+            console.log("Something wrong when updating data!"+ err.message);
+        }
+    
+        //console.log(doc);
+    });
+    let configEmail = req.body.email;
+    update = { email: configEmail };
+    User.findOneAndUpdate(filter, update, function(err, doc){
+        if(err){
+            console.log("Something wrong when updating data!"+ err.message);
+        }
+    
+        //console.log(doc);
+    });/*
+    let configUsername = req.body.username;
+    update = { username: configUsername };
+    User.findOneAndUpdate(filter, update, function(err, doc){
+        if(err){
+            console.log("Something wrong when updating data!"+ err.message);
+        }
+    
+        //console.log(doc);
+    });*/
+    setTimeout(function() {
+        res.redirect('/index');
+    }, 1000);   
 });

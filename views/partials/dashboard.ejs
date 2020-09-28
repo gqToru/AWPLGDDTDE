@@ -1,5 +1,9 @@
 <p id='yy'><%= currentUser.horario %></p>
 <p id='libros'><%= currentUser.seleccionado %></p>
+<p id='configUser' class="hide"><%= currentUser.username %></p>
+<p id='configEmail' class="hide"><%= currentUser.email %></p>
+<p id='configName' class="hide"><%= currentUser.nombreUsuario %></p>
+<p id='configCareer' class="hide"><%= currentUser.especialidad %></p>
 <div class="divs4" id="erasenext">
     <div id="topd">
         <h1>Bienvenido <%= currentUser.nombreUsuario %>!</h1>
@@ -612,6 +616,26 @@ function table(e){
               }
           }
       }
+      for(var k= 0; k< 7; k++){
+        let temporal = [];
+        for(var j= 0; j< fila; j++){
+            if (isNaN(nuevoArray[j][k])){
+                temporal.push(nuevoArray[j][k]);                
+            }
+        }
+        temporal.sort();
+      //  console.log(temporal);        
+        let space = 0;
+        for(var j = 0; j< fila; j++){
+                      
+            if (isNaN(nuevoArray[j][k])){
+                if(space <temporal.length){
+                nuevoArray[j][k] = temporal[space];
+                space++;
+                }                                
+            }
+        }        
+    }
       function copyArray(array){    
           // Función para copiar el mSelected
           let arrayReturned = [];
@@ -628,7 +652,8 @@ function table(e){
 
 
     });
-    function borrarDashboard(){
+    function borrarDashboard(config){
+        var config;
         parento.removeChild(topd);
         parento.removeChild(midd);
         parento.removeChild(seccionlibros);
@@ -649,10 +674,18 @@ function table(e){
                 location.reload(true);
             }, 1000);
         });
+        if(config == 0){
         botondiv.appendChild(botonsend);
         botonsend.classList.add('bFinal');
         botonsend.style.margin = '10px';
         botonsend.innerHTML = ">";
+        }else if(config == 1){
+            var sendForm = document.createElement('button');
+            botondiv.appendChild(sendForm);
+            sendForm.classList.add('bFinal');
+            sendForm.style.margin = '10px';
+            sendForm.innerHTML = ">";
+        }
         wrapperbuton.appendChild(botondiv);
         botondiv.style.display = 'flex';
         botondiv.style.flexDirection = 'row';
@@ -663,7 +696,7 @@ function table(e){
     var eimportance = document.getElementById('improtancia');
     eimportance.addEventListener('click', function(){
         console.log("editimportance");
-        borrarDashboard();
+        borrarDashboard(0);
         nuevoArray = x;
         for(var i=0; i<fila; i++){
             for(var j=0; j<7; j++){
@@ -806,6 +839,26 @@ function table(e){
               }
           }
       }
+      for(var k= 0; k< 7; k++){
+        let temporal = [];
+        for(var j= 0; j< fila; j++){
+            if (isNaN(nuevoArray[j][k])){
+                temporal.push(nuevoArray[j][k]);                
+            }
+        }
+        temporal.sort();
+      //  console.log(temporal);        
+        let space = 0;
+        for(var j = 0; j< fila; j++){
+                      
+            if (isNaN(nuevoArray[j][k])){
+                if(space <temporal.length){
+                nuevoArray[j][k] = temporal[space];
+                space++;
+                }                                
+            }
+        }        
+    }
       function copyArray(array){    
           // Función para copiar el mSelected
           let arrayReturned = [];
@@ -820,12 +873,164 @@ function table(e){
         send2();    
         })
     });
+
     var econfiguracion = document.getElementById('configu');
     econfiguracion.style.cursor = "pointer"
     econfiguracion.addEventListener('click', function(){
-        console.log("editCONFIG");
-        borrarDashboard();
-       
+        console.log();
+        borrarDashboard(1);
+        var configUser = document.getElementById("configUser");
+        var configName = document.getElementById("configName");
+        var configEmail = document.getElementById("configEmail");
+        var configCareer = document.getElementById("configCareer").innerText;
+        console.log(configUser.innerText);      
+        console.log(configName.innerText);
+        console.log(configEmail.innerText);
+        console.log(configCareer);        
+        var cofigFragment = document.createDocumentFragment();
+        var fieldCareer = document.createElement('select');
+        var form = document.createElement('form');
+        for (var i = 0 ; i < 4; i++){
+            var divField = document.createElement('div');
+            divField.style.backgroundColor = '#a5d8ff';
+            divField.style.marginBottom = '20px';
+            divField.style.padding = '10px';
+            divField.style.width = '25em';
+            divField.style.borderRadius = '5px';
+            var name = document.createElement('p');
+            name.style.fontWeight = 'bold';
+            name.style.marginTop = '0px';
+            var textField = document.createElement('input');
+            textField.style.height = '2em';
+            textField.style.width = '20em';
+            if(i == 0){
+                let group = document.createElement('h2');
+                let groupExplanation = document.createElement('h3');                
+                group.innerText = 'actualizar tus datos';
+                groupExplanation.innerText = 'sí deseas cambiar los datos asosciados a tu cuenta, ingresa el nuevo valor en la casilla que quieras editar y posteriormente haz click en el botón de siguiente para realizar los cambios.'
+                group.style.textAlign = 'left';
+                groupExplanation.style.textAlign = 'left';
+                group.style.marginBottom = '10px';
+                groupExplanation.style.margin = '0px 0px 10px 0px';
+                groupExplanation.style.maxWidth = '40rem';
+                groupExplanation.style.fontWeight = 'normal';
+                groupExplanation.style.fontSize = '1.2rem';
+                cofigFragment.appendChild(group);
+                cofigFragment.appendChild(groupExplanation);
+                cofigFragment.appendChild(divField);
+                divField.appendChild(name);
+                name.innerText = 'Nombre del Estudiante';
+                divField.appendChild(textField);
+                textField.setAttribute('type', 'text');
+                textField.setAttribute('name', 'nombreUsuario');
+                textField.setAttribute('placeholder', configName.innerText);
+            }else if(i == 1){
+                cofigFragment.appendChild(divField);
+                divField.appendChild(name);
+                name.innerText = 'Nombre de Usuario';
+                divField.appendChild(textField);
+                textField.setAttribute('type', 'text');
+                textField.setAttribute('name', 'username');
+                textField.setAttribute('disabled', 'disabled');
+                textField.setAttribute('placeholder', configUser.innerText);
+            }else if(i == 2){
+                cofigFragment.appendChild(divField);
+                divField.appendChild(name);
+                name.innerText = 'Correo electronico';
+                divField.appendChild(textField);
+                textField.setAttribute('type', 'email');
+                textField.setAttribute('name', 'email');
+                textField.setAttribute('placeholder', configEmail.innerText);
+            }else{
+                cofigFragment.appendChild(divField);
+                divField.appendChild(name);
+                name.innerText = 'Especialidad';
+                divField.appendChild(fieldCareer);
+                fieldCareer.setAttribute('name', 'especialidad');
+                fieldCareer.setAttribute('id', 'select');
+                fieldCareer.style.height = '2.6em';
+                fieldCareer.style.width = '20.5em';
+                for (var j = 0; j < 8; j++){
+                    optionCareer = document.createElement('option');
+                    if (j == 0){
+                        fieldCareer.appendChild(optionCareer);
+                        optionCareer.setAttribute('value', 'Ingeniería Agronómica');
+                        optionCareer.innerText = 'Ingeniería Agronómica';
+                        if(optionCareer.innerText == configCareer){                       
+                            optionCareer.selected = 'true';
+                        }
+                    }else if(j == 1){
+                        fieldCareer.appendChild(optionCareer);
+                        optionCareer.setAttribute('value', 'Ingeniería de Petróleo');
+                        optionCareer.innerText = 'Ingeniería de Petróleo';
+                        if(optionCareer.innerText == configCareer){                       
+                            optionCareer.selected = 'true';
+                        }
+                    }else if(j == 2){
+                        fieldCareer.appendChild(optionCareer);
+                        optionCareer.setAttribute('value', 'Ingeniería de Sistemas');
+                        optionCareer.innerText = 'Ingeniería de Sistemas';
+                        if(optionCareer.innerText == configCareer){                       
+                            optionCareer.selected = 'true';
+                        }
+                    }else if(j == 3){
+                        fieldCareer.appendChild(optionCareer);
+                        optionCareer.setAttribute('value', 'Ingeniería en Producción Animal');
+                        optionCareer.innerText = 'Ingeniería en Producción Animal';
+                        if(optionCareer.innerText == configCareer){                       
+                            optionCareer.selected = 'true';
+                        }
+                    }else if(j == 4){
+                        fieldCareer.appendChild(optionCareer);
+                        optionCareer.setAttribute('value', 'Licenciatura en Administración');
+                        optionCareer.innerText = 'Licenciatura en Administración';
+                        if(optionCareer.innerText == configCareer){                       
+                            optionCareer.selected = 'true';
+                        }
+                    }else if(j == 5){
+                        fieldCareer.appendChild(optionCareer);
+                        optionCareer.setAttribute('value', 'Licenciatura en Contaduría Pública');
+                        optionCareer.innerText = 'Licenciatura en Contaduría Pública';
+                        if(optionCareer.innerText == configCareer){                       
+                            optionCareer.selected = 'true';
+                        }
+                    }else if(j == 6){
+                        fieldCareer.appendChild(optionCareer);
+                        optionCareer.setAttribute('value', 'Licenciatura en Gerencia de Recursos Humanos');
+                        optionCareer.innerText = 'Licenciatura en Gerencia de Recursos Humanos';
+                        if(optionCareer.innerText == configCareer){                       
+                            optionCareer.selected = 'true';
+                        }
+                    }else if(j == 7){
+                        fieldCareer.appendChild(optionCareer);
+                        optionCareer.setAttribute('value', 'Licenciatura en Tecnología de los Alimentos');
+                        optionCareer.innerText = 'Licenciatura en Tecnología de los Alimentos';
+                        if(optionCareer.innerText == configCareer){                       
+                            optionCareer.selected = 'true';
+                        }
+                    }                    
+                }
+                
+            }                      
+        } 
+        var wrapper = document.getElementById('erasenext');
+        wrapper.style.display = 'flex';
+        wrapper.style.flexDirection = 'column';
+        wrapper.appendChild(form);
+        form.appendChild(cofigFragment);
+        form.setAttribute('id','config-form');
+        form.setAttribute('action','/ajaxRoute4');
+        form.setAttribute('method','POST');
+        wrapper.children[1].style.order = '6';
+        let botonSend = document.getElementsByClassName('bFinal');
+        botonSend = botonSend[1];
+        botonSend.setAttribute('type', 'submit');
+        botonSend.setAttribute('form', 'config-form');
+        botonSend.addEventListener('click', function(){
+            var messagetest = document.getElementsByTagName('input');
+            console.log(messagetest);
+        });  
+
     });
     function send(){
          var testJson = JSON.stringify(nuevoArray);
