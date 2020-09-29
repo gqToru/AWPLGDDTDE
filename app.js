@@ -183,6 +183,7 @@ app.post('/ajaxRoute4', (req,res)=>{
     var filter = { username: `${lol}` };    
     let configNombreUsuario = req.body.nombreUsuario;
     var update = { nombreUsuario: configNombreUsuario };
+    if(configNombreUsuario != ''){
     User.findOneAndUpdate(filter, update, function(err, doc){
         if(err){
             console.log("Something wrong when updating data!"+ err.message);
@@ -190,8 +191,10 @@ app.post('/ajaxRoute4', (req,res)=>{
     
         //console.log(doc);
     });
+    }
     let configEspecialidad = req.body.especialidad;
     update = { especialidad: configEspecialidad };
+    if(configEspecialidad != ''){
     User.findOneAndUpdate(filter, update, function(err, doc){
         if(err){
             console.log("Something wrong when updating data!"+ err.message);
@@ -199,15 +202,18 @@ app.post('/ajaxRoute4', (req,res)=>{
     
         //console.log(doc);
     });
+    }
     let configEmail = req.body.email;
     update = { email: configEmail };
+    if(configEmail != ''){
     User.findOneAndUpdate(filter, update, function(err, doc){
         if(err){
             console.log("Something wrong when updating data!"+ err.message);
         }
     
-        //console.log(doc);
-    });/*
+    });
+    }
+    /*
     let configUsername = req.body.username;
     update = { username: configUsername };
     User.findOneAndUpdate(filter, update, function(err, doc){
